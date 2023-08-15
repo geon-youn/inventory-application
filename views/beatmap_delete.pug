@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+  h1=title 
+
+  p Are you sure you want to delete this beatmap?
+  form(action="" method="post") 
+    input#beatmapid(type='hidden' name='beatmapid' required='true', value=beatmap._id)
+    button(type="submit") Yes 

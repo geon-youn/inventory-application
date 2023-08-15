@@ -1,0 +1,14 @@
+extends layout 
+
+block content 
+  h1=title
+  .mapper Mapped by #{beatmap.mapper}
+  .status #{beatmap.status}
+  a(href=beatmap.mode.url) 
+    div.mode #{beatmap.mode.name} 
+  .description #{beatmap.description}
+
+  .delete
+    a(href=`${beatmap.url}/delete`) Delete Beatmap 
+  .update 
+    a(href=`${beatmap.url}/update`) Update Beatmap

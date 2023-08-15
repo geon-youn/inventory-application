@@ -1,0 +1,43 @@
+extends layout 
+
+block content 
+  h1=title 
+
+  form(action="" method="post")
+    .form-group 
+      label(for="name") Song Name
+      input#name(type="text" name='name' value=beatmap ? beatmap.name : '')
+      label(for="author") Author 
+      input#author(type="text" name='author' value=beatmap ? beatmap.author : '')
+    .form-group 
+      label(for="mapper") Mapper Name
+      input#mapper(type="text" name='mapper' value=beatmap ? beatmap.mapper : '')
+    .form-group 
+      input#ranked(type="radio" name="status" value="Ranked" checked=beatmap ? beatmap.status==='Ranked' ? true : false : false)
+      label(for="ranked") Ranked
+      input#qualified(type="radio" name="status" value="Qualified" checked=beatmap ? beatmap.status==='Qualified' ? true : false : false)
+      label(for="qualified") Qualified
+      input#loved(type="radio" name="status" value="Loved" checked=beatmap ? beatmap.status==='Loved' ? true : false : false)
+      label(for="loved") Loved
+      input#favourites(type="radio" name="status" value="Favourites" checked=beatmap ? beatmap.status==='Favourites' ? true : false : false)
+      label(for="favourites") Favourites
+      input#pending(type="radio" name="status" value="Pending" checked=beatmap ? beatmap.status==='Pending' ? true : false : false)
+      label(for="pending") Pending
+      input#wip(type="radio" name="status" value="WIP" checked=beatmap ? beatmap.status==='WIP' ? true : false : false)
+      label(for="wip") WIP
+      input#graveyard(type="radio" name="status" value="Graveyard" checked=beatmap ? beatmap.status==='Graveyard' ? true : false : false)
+      label(for="graveyard") Graveyard
+    .form-group 
+      label(for="description") Description 
+      textarea#description(name="description" cols="30" rows="10") #{beatmap ? beatmap.description : ''} 
+    .form-group 
+      each mode in modes 
+        input(id=mode._id, type="radio" name="mode" value=mode._id checked=beatmap ? beatmap.mode ? beatmap.mode._id.toString()==mode._id.toString() : false : false)
+        label(for=mode._id) #{mode.name}
+    .form-group 
+      button(type="submit") Submit
+
+  if errors 
+    ul
+      each error in errors 
+        li #{error.msg}

@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1=title
+
+  ul.modes 
+    a(href='/beatmaps')
+      li.mode 
+        div.mode-name All
+    each mode in modes 
+      a(href=mode.url)
+        li.mode 
+          div.mode-name #{mode.name}
+
+  if currentMode 
+    .description #{currentMode.description}
+
+  ul.beatmaps
+    each beatmap in beatmaps 
+      a(href=beatmap.url) 
+        li.beatmap #{beatmap.fullname}
+
+  if currentMode
+    .delete
+      a(href=`${currentMode.url}/delete`) Delete Mode 
+    .update 
+      a(href=`${currentMode.url}/update`) Update Mode
+  else 
+    .create 
+      .create-mode 
+        a(href='beatmaps/m/create') Create Mode
+      .create-beatmaps 
+        a(href='beatmaps/b/create') Create Beatmap
